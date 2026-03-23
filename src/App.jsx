@@ -1,13 +1,17 @@
 import { Outlet } from 'react-router-dom'
-import Sidebar from './components/Sidebar'
+import Header from './components/Header'
 
 export default function App() {
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
-      <Sidebar />
-      <main style={{ flex: 1, overflow: 'auto' }}>
-        <Outlet />
-      </main>
-    </div>
+    <main>
+      <div className="layout-container w-full flex min-h-screen flex-col">
+        <Header />
+        <div className="flex flex-1 flex-col">
+          <main className="flex-1">
+            <Outlet />
+          </main>
+        </div>
+      </div>
+    </main>
   )
 }
