@@ -1,17 +1,53 @@
-import { Outlet } from 'react-router-dom'
+import { Suspense } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { projects } from './projects'
 import Header from './components/Header'
 
 export default function App() {
+  const location = useLocation()
+  const active = projects.find(p => `/${p.slug}` === location.pathname)
+
   return (
-    <main>
-      <div className="layout-container w-full flex min-h-screen flex-col">
+    <div className="flex min-h-screen">
+      <div className="fixed top-4 right-4 z-50">
         <Header />
-        <div className="flex flex-1 flex-col">
-          <main className="flex-1">
-            <Outlet />
-          </main>
-        </div>
       </div>
-    </main>
+      {/* Sidebar */}
+      <aside className="w-56 shrink-0 border-r border-[var(--border)] px-4 py-8 overflow-y-auto">
+        <h3 className="text-sm font-medium text-[var(--text)] mb-4 px-2">Components</h3>
+        <nav className="flex flex-col gap-0.5">
+          {projects.map(p => (
+            <NavLink
+              key={p.slug}
+              to={`/${p.slug}`}
+              className={({ isActive }) =>
+                `block px-2 py-1.5 rounded-md text-sm transition-colors ${
+                  isActive
+                    ? 'font-medium text-[var(--text-h)] bg-[var(--accent-bg)]'
+                    : 'text-[var(--text-h)] hover:bg-[var(--accent-bg)]'
+                }`
+              }
+            >
+              {p.name}
+            </NavLink>
+          ))}
+        </nav>
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 min-h-screen max-w-3xl mx-auto">
+        {active && (
+          <div className="px-10 pt-10 pb-4">
+            <h1 className="text-3xl font-semibold text-[var(--text-h)] mb-2" style={{ margin: 0, fontSize: '30px', letterSpacing: '-0.5px' }}>{active.name}</h1>
+            <p className="text-[var(--text)] text-base mt-2">{active.description}</p>
+          </div>
+        )}
+        <div className="mx-10 mt-4 rounded-xl border border-[var(--border)] relative flex h-72 w-full items-center justify-center p-10">
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
+        </div>
+      </main>
+    </div>
   )
 }

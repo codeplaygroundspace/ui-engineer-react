@@ -27,8 +27,8 @@ export default function Header() {
   }, [theme])
 
   return (
-    <header className="sticky top-0 z-10 flex flex-wrap justify-between rounded-bl-[32px] rounded-br-[32px] px-5 py-4 transition-all duration-300 ease-in-out">
-      <div className="ml-auto flex items-center gap-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1.5">
+    <header>
+      <div className="flex items-center gap-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1.5">
         {modes.map(({ key, Icon }) => (
           <button
             key={key}

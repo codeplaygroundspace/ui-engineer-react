@@ -1,0 +1,169 @@
+.privacy-toggle-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  user-select: none;
+}
+
+.privacy-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Floating modal --- */
+.privacy-modal {
+  position: absolute;
+  bottom: 80px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 100px;
+  padding: 6px;
+  display: flex;
+  gap: 2px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+  opacity: 0;
+  filter: blur(15px);
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    filter 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.privacy-modal.active {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Triangle caret */
+.privacy-modal::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  backdrop-filter: inherit;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: -1;
+}
+
+/* --- Option buttons --- */
+.privacy-option {
+  background: transparent;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #1d1d1f;
+  transition: background 0.2s;
+}
+
+.privacy-option:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.privacy-option-icon {
+  color: #a1a1a1;
+}
+
+/* --- Main trigger button --- */
+.privacy-main-button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  outline: none;
+  transition: transform 0.1s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.privacy-main-button:active {
+  transform: scale(0.85);
+}
+
+.privacy-button-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- Icon animation --- */
+.privacy-active-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a1a1a1;
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+.privacy-active-icon.switching {
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(0.7);
+}
+
+.privacy-active-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+/* --- Chevron --- */
+.privacy-chevron {
+  color: #a1a1a1;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.privacy-container.open .privacy-chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Dark mode support --- */
+.dark .privacy-modal {
+  background: rgba(30, 30, 30, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .privacy-modal::after {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .privacy-option {
+  color: #f5f5f7;
+}
+
+.dark .privacy-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .privacy-main-button {
+  background-color: #2a2a2a;
+}
+
+.dark .privacy-active-text {
+  color: #f5f5f7;
+}
