@@ -1,10 +1,10 @@
-import React from 'react';
-import MinimalLayout from '../layouts/MinimalLayout';
-import GridCard from '../components/GridCard';
-import { mockItems } from '../data/mockItems';
+import React from 'react'
+import MinimalLayout from '../layouts/MinimalLayout'
+import GridCard from '../components/GridCard'
+import { mockItems } from '../data/mockItems'
 
 export default function Home() {
-  const items = mockItems;
+  const items = mockItems
   return (
     <MinimalLayout>
       <main className="p-6">
@@ -15,5 +15,5 @@ export default function Home() {
         </section>
       </main>
     </MinimalLayout>
-  );
+  )
 }

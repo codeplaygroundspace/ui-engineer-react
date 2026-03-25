@@ -1,13 +1,21 @@
 import { useState, useEffect } from 'react'
 import { Moon, Sun, Monitor } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-const modes = [
-  { key: 'dark',   Icon: Moon },
-  { key: 'light',  Icon: Sun },
+type ThemeMode = 'dark' | 'light' | 'system'
+
+interface ThemeOption {
+  key: ThemeMode
+  Icon: LucideIcon
+}
+
+const modes: ThemeOption[] = [
+  { key: 'dark', Icon: Moon },
+  { key: 'light', Icon: Sun },
   { key: 'system', Icon: Monitor },
 ]
 
-function applyTheme(mode) {
+function applyTheme(mode: ThemeMode): void {
   const root = document.documentElement
   root.classList.remove('dark', 'light')
   if (mode === 'dark') {
@@ -19,7 +27,9 @@ function applyTheme(mode) {
 }
 
 export default function Header() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'system')
+  const [theme, setTheme] = useState<ThemeMode>(
+    () => (localStorage.getItem('theme') as ThemeMode) || 'system'
+  )
 
   useEffect(() => {
     applyTheme(theme)
@@ -34,9 +44,10 @@ export default function Header() {
             key={key}
             onClick={() => setTheme(key)}
             className={`flex items-center justify-center w-7 h-7 rounded-full transition-colors duration-150 cursor-pointer
-              ${theme === key
-                ? 'bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
-                : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300'
+              ${
+                theme === key
+                  ? 'bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                  : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}
           >
             <Icon size={14} />
