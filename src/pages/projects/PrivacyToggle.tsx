@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { Lock, Globe, ChevronDown } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import './PrivacyToggle.css'
 
-const options = [
+interface PrivacyOption {
+  label: string
+  icon: LucideIcon
+}
+
+const options: PrivacyOption[] = [
   { label: 'Private', icon: Lock },
   { label: 'Public', icon: Globe },
 ]
@@ -11,11 +17,11 @@ export default function PrivacyToggle() {
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState('Private')
   const [switching, setSwitching] = useState(false)
-  const containerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const ActiveIcon = options.find((o) => o.label === selected).icon
+  const ActiveIcon = options.find((o) => o.label === selected)!.icon
 
-  function handleSwitch(label) {
+  function handleSwitch(label: string) {
     setOpen(false)
     if (label === selected) return
 
@@ -25,8 +31,8 @@ export default function PrivacyToggle() {
   }
 
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
+    function handleClickOutside(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setOpen(false)
       }
     }
@@ -36,18 +42,11 @@ export default function PrivacyToggle() {
 
   return (
     <div className="privacy-toggle-page">
-      <div
-        ref={containerRef}
-        className={`privacy-container${open ? ' open' : ''}`}
-      >
+      <div ref={containerRef} className={`privacy-container${open ? ' open' : ''}`}>
         {/* Floating modal */}
         <div className={`privacy-modal${open ? ' active' : ''}`}>
           {options.map(({ label, icon: Icon }) => (
-            <button
-              key={label}
-              className="privacy-option"
-              onClick={() => handleSwitch(label)}
-            >
+            <button key={label} className="privacy-option" onClick={() => handleSwitch(label)}>
               <Icon size={20} className="privacy-option-icon" />
               {label}
             </button>
@@ -68,11 +67,7 @@ export default function PrivacyToggle() {
             </div>
             <span className="privacy-active-text">{selected}</span>
           </div>
-          <ChevronDown
-            size={18}
-            className="privacy-chevron"
-            strokeWidth={3}
-          />
+          <ChevronDown size={18} className="privacy-chevron" strokeWidth={3} />
         </button>
       </div>
     </div>

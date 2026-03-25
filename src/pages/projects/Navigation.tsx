@@ -9,12 +9,12 @@ export default function Navigation() {
   const [dotX, setDotX] = useState(0)
   const [isJumping, setIsJumping] = useState(false)
   const [jumpHeight, setJumpHeight] = useState(40)
-  const navRef = useRef(null)
-  const itemRefs = useRef({})
-  const dotRef = useRef(null)
+  const navRef = useRef<HTMLDivElement>(null)
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const dotRef = useRef<HTMLDivElement>(null)
   const prevX = useRef(0)
 
-  const getDotTarget = useCallback((label) => {
+  const getDotTarget = useCallback((label: string): number => {
     const el = itemRefs.current[label]
     if (!el || !navRef.current) return 0
     return el.offsetLeft - 20
@@ -33,7 +33,7 @@ export default function Navigation() {
     return () => window.removeEventListener('resize', position)
   }, [active, getDotTarget])
 
-  function handleClick(label) {
+  function handleClick(label: string) {
     if (label === active) return
 
     const targetX = getDotTarget(label)
@@ -62,7 +62,9 @@ export default function Navigation() {
         {items.map((label) => (
           <div
             key={label}
-            ref={(el) => { itemRefs.current[label] = el }}
+            ref={(el) => {
+              itemRefs.current[label] = el
+            }}
             className={`gooey-nav-item${active === label ? ' active' : ''}`}
             onClick={() => handleClick(label)}
           >
@@ -84,7 +86,7 @@ export default function Navigation() {
           <div
             ref={dotRef}
             className={`gooey-dot${isJumping ? ' is-jumping' : ''}`}
-            style={{ '--jump-height': `${jumpHeight}px` }}
+            style={{ '--jump-height': `${jumpHeight}px` } as React.CSSProperties}
             onAnimationEnd={handleAnimationEnd}
           />
         </motion.div>

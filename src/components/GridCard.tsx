@@ -1,7 +1,7 @@
-import React from 'react';
-import { Item } from '../data/mockItems';
+import React from 'react'
+import { Item } from '../data/mockItems'
 
-type Props = { item: Item };
+type Props = { item: Item }
 
 export default function GridCard({ item }: Props) {
   return (
@@ -17,5 +17,5 @@ export default function GridCard({ item }: Props) {
         </div>
       </div>
     </article>
-  );
+  )
 }
