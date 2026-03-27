@@ -33,4 +33,11 @@ export const projects: Project[] = [
       'A glassmorphism toolbar with animated conic-gradient active ring, theme toggle, and swappable visual themes.',
     component: lazy(() => import('./pages/projects/GlassToolbar')),
   },
+  {
+    slug: 'organic-nav',
+    name: 'Organic Nav',
+    description:
+      'A nature-inspired navigation with morphing blob shapes, floating particles, and breathing animations. No right angles.',
+    component: lazy(() => import('./pages/projects/OrganicNav')),
+  },
 ]

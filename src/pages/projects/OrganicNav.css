@@ -1,0 +1,120 @@
+/* Organic Navigation — nature-inspired, no right angles */
+
+.organic-nav-wrapper {
+  --on-bg: #1a1612;
+  --on-text: #e8ddd0;
+  --on-text-muted: #9a8b7a;
+  --on-accent: #d4956a;
+  --on-glow: rgba(212, 149, 106, 0.3);
+  --on-petal: rgba(212, 149, 106, 0.12);
+  --on-jade: #7ba68a;
+  --on-lotus: #c97b8b;
+  --on-twilight: #6b6a8a;
+  --on-amber: #d4a45a;
+}
+
+.organic-nav-wrapper[data-theme='light'] {
+  --on-bg: transparent;
+  --on-text: #3d3228;
+  --on-text-muted: #8a7d6f;
+  --on-accent: #b87a4a;
+  --on-glow: rgba(184, 122, 74, 0.2);
+  --on-petal: rgba(184, 122, 74, 0.1);
+  --on-jade: #5a8a68;
+  --on-lotus: #a85f6f;
+  --on-twilight: #5a5978;
+  --on-amber: #b8903a;
+}
+
+/* Floating particles */
+@keyframes on-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--dx), var(--dy)) scale(0.6);
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+
+.on-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: on-drift var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+/* Breathing animation for idle items */
+@keyframes on-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.on-nav-item {
+  animation: on-breathe 4s ease-in-out infinite;
+  animation-delay: var(--breathe-delay);
+}
+
+/* Bloom animation for active indicator */
+@keyframes on-bloom {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Ripple on click */
+@keyframes on-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.on-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--on-glow);
+  animation: on-ripple 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Soft pulsing glow behind active item */
+@keyframes on-pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+.on-active-glow {
+  animation: on-pulse-glow 3s ease-in-out infinite;
+}
