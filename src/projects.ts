@@ -26,4 +26,11 @@ export const projects: Project[] = [
       'A jumping gooey dot navigation with spring-based sliding and squash-stretch animations.',
     component: lazy(() => import('./pages/projects/Navigation')),
   },
+  {
+    slug: 'glass-toolbar',
+    name: 'Glass Toolbar',
+    description:
+      'A glassmorphism toolbar with animated conic-gradient active ring, theme toggle, and swappable visual themes.',
+    component: lazy(() => import('./pages/projects/GlassToolbar')),
+  },
 ]

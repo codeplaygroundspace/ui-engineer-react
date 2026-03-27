@@ -47,7 +47,7 @@ export default function App() {
             <p className="text-(--text) text-base mt-2">{active.description}</p>
           </div>
         )}
-        <div className="mx-10 mt-4 rounded-xl border border-(--border) relative flex h-72 w-full items-center justify-center p-10">
+        <div className="mx-10 mt-4 rounded-xl border border-(--border) relative flex h-72 w-full items-center justify-center overflow-hidden">
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>

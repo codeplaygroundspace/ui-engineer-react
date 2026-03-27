@@ -1,0 +1,105 @@
+/* Glass Toolbar — scoped variables */
+.glass-toolbar-wrapper {
+  --gt-ring-c1: #533517;
+  --gt-ring-c2: #c49746;
+  --gt-ring-c3: #feeaa5;
+  --gt-ring-glow: #e8af48;
+  --gt-pink-irid: #ffc0cb;
+  --gt-blue-irid: #a5c9fe;
+  --gt-toolbar-bg: rgba(255, 255, 255, 0.7);
+  --gt-toolbar-border: rgba(0, 0, 0, 0.1);
+  --gt-bg-color: transparent;
+  --gt-text-color: #000000;
+  --gt-inner-plate: #ffffff;
+}
+
+.glass-toolbar-wrapper[data-theme='dark'] {
+  --gt-toolbar-bg: rgba(15, 15, 15, 0.7);
+  --gt-toolbar-border: rgba(255, 255, 255, 0.1);
+  --gt-bg-color: #050505;
+  --gt-text-color: #ffffff;
+  --gt-inner-plate: #0f0f0f;
+}
+
+/* Visual theme overrides */
+.glass-toolbar-wrapper[data-visual-theme='techno'] {
+  --gt-ring-c1: #1a0033;
+  --gt-ring-c2: #7000ff;
+  --gt-ring-c3: #00f2ff;
+  --gt-ring-glow: #7000ff;
+}
+
+.glass-toolbar-wrapper[data-visual-theme='matrix'] {
+  --gt-ring-c1: #001a00;
+  --gt-ring-c2: #008f11;
+  --gt-ring-c3: #00ff41;
+  --gt-ring-glow: #00ff41;
+}
+
+/* Rotating conic gradient ring */
+@keyframes gt-rotate-ring {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gt-golden-ring-gradient {
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--gt-ring-c1) 0%,
+    var(--gt-ring-c2) 15%,
+    var(--gt-ring-c3) 30%,
+    var(--gt-pink-irid) 32%,
+    white 33.5%,
+    var(--gt-blue-irid) 35%,
+    var(--gt-ring-c2) 50%,
+    var(--gt-ring-c1) 65%,
+    var(--gt-ring-c2) 80%,
+    var(--gt-ring-c3) 95%,
+    var(--gt-pink-irid) 97%,
+    white 98.5%,
+    var(--gt-blue-irid) 100%
+  );
+  animation: gt-rotate-ring 10s linear infinite;
+}
+
+.gt-glass-toolbar {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--gt-toolbar-border);
+  background: var(--gt-toolbar-bg);
+}
+
+/* Ambient glow */
+.gt-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--gt-ring-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+  transition: background 0.5s ease;
+}
+
+/* Noise overlay */
+.gt-noise-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.04;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
